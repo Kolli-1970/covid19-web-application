@@ -1,0 +1,125 @@
+<div class="container">
+<div class="row">
+    <div class="col-sm-6">
+         <h3><a href="javascript: void(0);" (click)="covid19.home()"> {{user.displayName}}</a></h3>
+         
+    </div>
+    <div class="col-sm-6 text-right">
+<button class="btn btn-danger"  (click)="covid19.signOut()" >Signout</button>
+</div>
+</div>
+
+<div class="text-center">
+    <h1>Covid-19</h1>
+    <h4>Live Updates & Statistics</h4>
+</div>
+
+<table class="table">
+  
+     <tbody>
+       <tr class="table-warning">
+      <td>Total Cases</td> 
+      <td>{{sum.Global.TotalConfirmed}}</td> 
+    </tr>
+    <tr class="table-warning">
+      <td>New Cases</td> 
+      <td>{{sum.Global.NewConfirmed}}</td> 
+    </tr>
+    <tr class="table-warning">
+      <td>Active Cases</td> 
+      <td>{{sum.Global.TotalConfirmed-sum.Global.TotalRecovered-sum.Global.TotalDeaths}}</td> 
+    </tr>
+   
+    <tr class="table-info" >
+      <td>Total Recovered</td> 
+      <td>{{sum.Global.TotalRecovered}}</td> 
+    </tr>
+    <tr class="table-info" >
+      <td>New Recovered</td> 
+      <td>{{sum.Global.NewRecovered}}</td> 
+    </tr>
+    <tr class="table-info" >
+      <td>Recovery Rate</td> 
+      <td ng-model="myDecimal | number : 2" >{{sum.Global.TotalRecovered/sum.Global.TotalConfirmed * 100}}%</td> 
+    </tr>
+    <tr class="table-warning">
+      <td>Total Deaths</td> 
+      <td>{{sum.Global.TotalDeaths}}</td> 
+    </tr>
+    <tr class="table-warning">
+      <td>New Deaths</td> 
+      <td>{{sum.Global.NewDeaths}}</td> 
+    </tr>
+    <tr class="table-warning" >
+      <td>Mortality Rate</td> 
+      <td>{{sum.Global.TotalDeaths/ sum.Global.TotalConfirmed *100}}%</td> 
+    </tr>
+    </tbody>
+  </table>
+ 
+
+  
+  <h2>Carona Virus Cases Distribution World Wide</h2>
+  <div id="divChart">
+    <canvas id="CovidPie"></canvas>
+    </div>
+  <h4>Then we display the last 7 days data in a chart.</h4>
+  <h2>Daily Corona Virus Cases Worldwide</h2>
+  <div id="divChart">
+    <canvas id="CovidBar"></canvas>
+    </div>
+    
+      <h4>All Data Since 13 April 2020</h4>
+      <h2>Total Carona Virus Cases Worldwide</h2>
+      <div id="divChart">
+        <canvas id="CovidChart"></canvas>
+        </div>
+
+  <div class="text-center">
+    <h1>Corona Virus Cases By Country</h1>
+    
+</div>
+
+
+
+<table class="table">
+
+  <thead>
+       <tr>
+        <th (click)="sort('Country')">Country  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort('NewConfirmed')">New Cases  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort('TotalConfirmed')">Total Cases  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort('NewRecovered')">New Recoveries  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort('TotalRecovered')"> Total Recoveries  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort('NewDeaths')">New Deaths  &nbsp;<i class="fa fa-sort"></i></th>
+        <th (click)="sort('TotalDeaths')">Total Deaths  &nbsp;<i class="fa fa-sort"></i></th>    
+      </tr>
+  </thead>
+  <tbody>
+     
+    <tr *ngFor="let new of summary | orderBy: key:reverse">      
+      <td class="table-secondary" ><a href="javascript: void(0);" (click)="onClick($event)" id="{{new.Country}}" >{{new.Country}}</a></td>
+      <td class="table-success">{{new.NewConfirmed}}</td>
+      <td class="table-danger">{{new.TotalConfirmed}}</td>
+      <td class="table-warning">{{new.NewRecovered}}</td>
+      <td class="table-info">{{new.TotalRecovered}}</td>
+      <td class="table-light">{{new.NewDeaths}}</td>
+      <td class="table-dark">{{new.TotalDeaths}}</td>
+    </tr>
+   
+  </tbody>
+</table>
+
+ 
+<h2> Global News </h2>
+
+<div *ngFor="let new of data">
+    <p>Description: {{ new.description}}</p> 
+      <p>Date: {{ new.date.toDate() | date}}</p> 
+      <p>Country: {{ new.country}}</p> 
+ </div>
+
+<div class="text-center">
+Data Source: <a href="https://covid19api.com/">COVID-19 API/Johns Hopkins CSSE</a>
+</div>
+</div>

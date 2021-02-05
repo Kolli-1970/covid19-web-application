@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+                <div class="col-sm-6">
+                     <h3> {{user.displayName}}</h3>
+                     
+                </div>
+                <div class="col-sm-6 text-right">
+            <button class="btn btn-danger"  (click)="covid19.signOut()" >Signout</button>
+            </div>
+    </div>
+        <h1> My News </h1>
+    
+            <table class="table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th >Description</th>
+                <th >Country</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let new of data">
+                <td> Date: {{ new.date.toDate() | date}}</td>
+                <td> Date: {{ new.description}}</td>
+                <td> Date: {{ new.country}}</td>
+              </tr>
+             
+            </tbody>
+          </table>
+          </div>

@@ -1,0 +1,120 @@
+<div class="container">
+    <div class="row">
+                <div class="col-sm-6">
+                  <h2><a href="javascript: void(0);" (click)="covid19.home()"> {{user.displayName}}</a></h2>
+                     
+                </div>
+                <div class="col-sm-6 text-right">
+            <button class="btn btn-danger"  (click)="covid19.signOut()" >Signout</button>
+            </div>
+    </div>
+
+
+<div class="text-center">
+        <h1> Covid19 </h1>
+        <h4> Live Status And Statistics</h4>
+        <p> WorldWide > {{sub.country}}</p>
+      </div>
+      <strong>Corona Virus Summary In {{sub.country}}</strong>   
+                 
+            <table class="table">
+  
+              <tbody>
+                <tr class="table-warning">
+                  <td>Total Cases</td> 
+                  <td>{{filter['0'].TotalConfirmed}}</td> 
+                </tr>
+             <tr class="table-warning">
+               <td>New Cases</td> 
+               <td>{{filter['0'].NewConfirmed}}</td> 
+             </tr>
+            
+             <tr class="table-warning">
+              <td>Active Cases</td> 
+              <td>{{filter['0'].TotalConfirmed-filter['0'].TotalRecovered-filter['0'].TotalDeaths}}</td> 
+            </tr>
+           
+             <tr class="table-info" >
+               <td>Total Recovered</td> 
+               <td>{{filter['0'].TotalRecovered}}</td> 
+             </tr>
+             <tr class="table-info" >
+               <td>New Recovered</td> 
+               <td>{{filter['0'].NewRecovered}}</td> 
+             </tr> 
+             <tr class="table-info" >
+              <td>Recovery Rate</td> 
+              <td>{{filter['0'].TotalRecovered/filter['0'].TotalConfirmed * 100}}%</td> 
+            </tr>
+            <tr class="table-warning">
+              <td>Total Deaths</td> 
+              <td>{{filter['0'].TotalDeaths}}</td> 
+            </tr>
+             <tr class="table-warning">
+               <td>New Deaths</td> 
+               <td>{{filter['0'].NewDeaths}}</td> 
+             </tr>
+             <tr class="table-warning" >
+              <td>Mortality Rate</td> 
+              <td>{{filter['0'].TotalDeaths/filter['0'].TotalConfirmed * 100}}%</td> 
+            </tr>
+             </tbody>
+           </table>
+        
+    
+           <h2>Carona Virus Cases Distribution In {{sub.country}}</h2>
+           <div id="divChart">
+             <canvas id="CovidPie"></canvas>
+             </div>
+           <h4>Then we display the last 7 days data in a chart.</h4>
+           <h2>Daily Corona Virus Cases In {{sub.country}}</h2>
+           <div id="divChart">
+             <canvas id="CovidBar"></canvas>
+             </div>
+             
+               <h4>All Data Since 13 April 2020</h4>
+               <h2>Total Carona Virus CasesIn {{sub.country}}</h2>
+               <div id="divChart">
+                 <canvas id="CovidChart"></canvas>
+                 </div>
+         
+           
+      
+         <h2> News Related to {{sub.country}} </h2>
+
+   <div *ngFor="let new of newfilter">
+       <p>Description: {{ new.description}}</p> 
+         <p>Date: {{ new.date.toDate() | date}}</p> 
+         <p>Country: {{ new.country}}</p> 
+         <p>Posted By: {{ new.name}}</p> 
+    </div>
+
+     <div class="card">
+        <div class="card-content">
+                <span class="card-title">Add News for  {{sub.country}}</span>
+                <form (ngSubmit)="onSubmit()" class="col s6">
+                <div class="row">
+                 <div class="input-field col s4">
+                    <textarea type="text" placeholder="Add Description" id="descriptionInput" [(ngModel)]="description" name="descriptionInput"></textarea>
+                    </div>           
+                   
+                        <div class="input-field col s4">
+                           <input type="date" placeholder="Add Date" [(ngModel)]="date" id="dateInput" name="dateInput">
+                           </div>    
+                                  
+                           </div>
+                           <!-- <div class="row">
+                            <div class="input-field col s6">
+                               <input type="text" placeholder="Add Country" [(ngModel)]="country" id="countryInput" name="countryInput" >
+                               </div>           
+                               </div> -->
+                     <input type="submit" value="submit" class="btn btn-primary">
+                    </form>
+        </div>
+        </div>
+
+        <div class="text-center">
+          Data Source: <a href="https://covid19api.com/">COVID-19 API/Johns Hopkins CSSE</a>
+          </div>
+       </div> 
+ 
